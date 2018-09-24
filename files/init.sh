@@ -22,6 +22,9 @@ apt-get upgrade -y
 apt-get install -y apt-utils
 apt-get install -y sudo nodejs npm git g++ curl tmux wget python3 python3-pip
 
+pip3 install -r /root/requirements.txt
+rm /root/requirements.txt
+
 echo "installing gcc-arm-none-eabi and mbed-cli..."
 apt-get install -y gcc-arm-none-eabi mercurial
 cd $userdir
