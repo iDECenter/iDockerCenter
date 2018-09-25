@@ -11,7 +11,8 @@ userdir="/home/$username"
 rm /root/username /root/userpasswd
 echo "user is ($username:$userpasswd)"
 mkdir $userdir
-useradd -d $userdir $username
+groupadd -g 4396 wso
+useradd -d $userdir -g wso $username
 echo "$username:$userpasswd" | chpasswd
 chown $username $userdir
 
@@ -33,7 +34,7 @@ tar xf gcc-arm-none-eabi.tar.bz2
 rm gcc-arm-none-eabi.tar.bz2
 gccarmpath=$(ls -l | egrep ^d.*gcc.*$ | awk '{print $NF}')
 chown -R $username $gccarmpath
-echo "export PATH=$userdir/$gccarmpath/bin:\$PATH" >> /etc/profile
+echo "export PATH=$userdir/$gccarmpath/bin:\$PATH" > /etc/profile.d/gccarm.sh
 cd /root/
 
 pip3 install mbed-cli
@@ -49,7 +50,7 @@ echo "sudo -i -u $username node $userdir/c9/server.js --listen 0.0.0.0 --port 80
 echo "setting hints..."
 while read line
 do
-    echo "echo \"$line\"" >> /etc/profile
+    echo "echo \"$line\"" >> /etc/profile.d/hint.sh
 done < /root/hint
 rm /root/hint
 
