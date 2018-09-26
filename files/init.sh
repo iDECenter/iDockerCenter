@@ -23,7 +23,9 @@ apt-get upgrade -y
 apt-get install -y apt-utils
 apt-get install -y sudo nodejs npm git g++ curl tmux wget python3 python3-pip
 
-pip3 install -r /root/requirements.txt
+python3 -m pip install pip -U
+python3 -m pip config set gloabl.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+python3 -m pip install -r /root/requirements.txt
 rm /root/requirements.txt
 
 echo "installing gcc-arm-none-eabi and mbed-cli..."
