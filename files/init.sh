@@ -21,11 +21,11 @@ apt-get update
 apt-get upgrade -y
 
 apt-get install -y apt-utils
-apt-get install -y sudo nodejs npm git g++ curl tmux wget python3 python3-pip
+apt-get install -y sudo nodejs npm git g++ curl tmux wget python python-pip
 
-python3 -m pip install pip -U
-python3 -m pip config set gloabl.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-python3 -m pip install -r /root/requirements.txt
+python -m pip install pip -U
+python -m pip config set gloabl.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+python -m pip install -r /root/requirements.txt
 rm /root/requirements.txt
 
 echo "installing gcc-arm-none-eabi and mbed-cli..."
@@ -39,7 +39,7 @@ chown -R $username $gccarmpath
 echo "export PATH=$userdir/$gccarmpath/bin:\$PATH" > /etc/profile.d/gccarm.sh
 cd /root/
 
-pip3 install mbed-cli
+pip install mbed-cli
 
 echo "writing entry script..."
 echo "PASS=\"username:password\""                > /root/start.sh
