@@ -2,17 +2,21 @@ echo "loading root password..."
 chpasswd < /root/rootpasswd
 rm /root/rootpasswd
 
-echo -e "LANG=\"en_US.UTF-8\"" > /etc/default/local
+echo "LANG=\"en_US.UTF-8\"" > /etc/default/locale
+echo "LC_ALL=\"en_US.UTF-8\"" >> /etc/default/locale
+locale
 
 echo "adding user..."
 read username < /root/username
 read userpasswd < /root/userpasswd
+read uid < /root/uid
+read gid < /root/gid
 userdir="/home/$username"
-rm /root/username /root/userpasswd
-echo "user is ($username:$userpasswd)"
+rm /root/username /root/userpasswd /root/uid /root/gid
+echo "user is ($username:$userpasswd) uid=$uid gid=$gid"
 mkdir $userdir
-groupadd -g 4396 wso
-useradd -d $userdir -g wso $username
+groupadd -g $gid wso
+useradd -d $userdir -g wso -u $uid $username
 echo "$username:$userpasswd" | chpasswd
 chown $username $userdir
 

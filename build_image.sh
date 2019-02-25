@@ -21,11 +21,13 @@ fi
 cp rootpasswd.shadow files/rootpasswd
 cp username.shadow files/username
 cp userpasswd.shadow files/userpasswd
+id -u > files/uid
+id -g > files/gid
 
 cd files
 chmod +x *.sh
 tar cf ../files.tar *
-rm rootpasswd username userpasswd
+rm rootpasswd username userpasswd uid gid
 cd ..
 
 docker build . -t idec/idec:latest --no-cache
